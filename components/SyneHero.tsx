@@ -11,10 +11,6 @@ export const SyneHero = () => {
     const { productName, tagline } = content.brand
     const { subheadline, primaryCta } = content.hero
 
-    useEffect(() => {
-        setIsVisible(true)
-    }, [])
-
     return (
         <div className="w-full overflow-hidden bg-white relative">
             <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24 pt-32 sm:py-32">
