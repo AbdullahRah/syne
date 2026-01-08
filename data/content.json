@@ -11,7 +11,7 @@
         "credibilityCues": [
             "Built for Alberta contractors.",
             "Designed for crews and inspectors in the field.",
-            "Start with Calgary + Alberta; expand nationally."
+            "Calgary + Alberta; expanding nationally."
         ],
         "tone": {
             "contractors": "Direct, ROI-driven, practical. Avoid hype.",
@@ -24,7 +24,7 @@
             "Capture every extra. Prove every inspection. Close out faster.",
             "Jobsite intelligence + building code compliance—end to end."
         ],
-        "subheadline": "Syne autonomous turns photos, WhatsApp updates, and field notes into structured project data, automated workflows, and jurisdiction-aware building code verification—from design through closeout.",
+        "subheadline": "Syne autonomous turns photos, WhatsApp updates, and field notes into structured project data, automated workflows, and jurisdiction-aware building code verification from design through closeout.",
         "primaryCta": {
             "label": "Book a demo",
             "href": "/contact"

@@ -36,8 +36,8 @@ export const PortfolioNavbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-background/95 backdrop-blur-md shadow-sm"
-        : "bg-transparent"
+        ? "bg-[#f9f8f6]/95 backdrop-blur-md shadow-sm"
+        : "bg-[#f9f8f6]"
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -47,7 +47,7 @@ export const PortfolioNavbar = () => {
               href="/"
               className="flex items-center"
             >
-              <img src="/logo.png" alt="Syne Autonomous" className="h-10 w-auto" />
+              <img src="/logo.png" alt="Syne Autonomous" className="h-16 w-auto" />
             </Link>
           </div>
 
@@ -98,7 +98,7 @@ export const PortfolioNavbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden bg-background/95 backdrop-blur-md border-t border-border"
+            className="md:hidden bg-[#f9f8f6]/95 backdrop-blur-md border-t border-border"
           >
             <div className="px-6 py-6 space-y-4">
               {navigationLinks.map((link) => (
