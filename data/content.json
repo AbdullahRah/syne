@@ -1,0 +1,301 @@
+{
+    "brand": {
+        "name": "syne autonomous",
+        "tagline": "Construction Superintelligence",
+        "positioning": "Your jobsite brain + compliance engine.",
+        "credibilityCues": [
+            "Built for Alberta contractors.",
+            "Designed for crews and inspectors in the field.",
+            "Start with Calgary + Alberta; expand nationally."
+        ],
+        "tone": {
+            "contractors": "Direct, ROI-driven, practical. Avoid hype.",
+            "inspectors": "Premium, authoritative, precise, collaborative. Emphasize verifiable/defensible/traceable."
+        }
+    },
+    "hero": {
+        "headlineOptions": [
+            "Turn jobsite chaos into a clean system of record.",
+            "Capture every extra. Prove every inspection. Close out faster.",
+            "Jobsite intelligence + building code compliance—end to end."
+        ],
+        "subheadline": "Syne autonomous turns photos, WhatsApp updates, and field notes into structured project data, automated workflows, and jurisdiction-aware building code verification—from design through closeout.",
+        "primaryCta": {
+            "label": "Book a demo",
+            "href": "/contact"
+        },
+        "secondaryCta": {
+            "label": "Upload a sample permit set",
+            "href": "/contact#upload"
+        }
+    },
+    "audiences": [
+        {
+            "key": "contractors",
+            "title": "For contractors and trades",
+            "bullets": [
+                "Snap a photo of paper → AI extracts structured fields (daily logs, inspection reports, change orders, safety forms).",
+                "Forward WhatsApp photos or send voice notes → structured updates (progress, materials, delays, extras).",
+                "Auto-updates timelines, daily logs, and next invoice triggers.",
+                "Produces audit-ready compliance records with a searchable documentation trail."
+            ],
+            "roi": [
+                "Capture missed extras.",
+                "Reduce admin hours.",
+                "Ship closeout faster.",
+                "Avoid re-inspection delays."
+            ]
+        },
+        {
+            "key": "inspectors",
+            "title": "For inspectors and municipalities",
+            "bullets": [
+                "Jurisdiction-aware building code engine (national, provincial, municipal) converted into verifiable checkpoints.",
+                "Continuous evidence verification across design documents, construction photos, test reports, and inspection records.",
+                "Defensible approval packages with traceable rule-to-evidence mapping.",
+                "Reduces review cycles without replacing human judgment."
+            ],
+            "roi": [
+                "Reduce review cycles.",
+                "Improve approval confidence.",
+                "Defensible documentation.",
+                "Fewer callbacks."
+            ]
+        }
+    ],
+    "modules": {
+        "jobsiteOperations": [
+            {
+                "name": "Jobsite Data Capture",
+                "desc": "Photo-to-data extraction for paper documents."
+            },
+            {
+                "name": "WhatsApp / Voice Intake Bot",
+                "desc": "Photo + voice → structured entries."
+            },
+            {
+                "name": "Daily Logs + Progress Tracking",
+                "desc": "Auto-generated summaries with photos linked."
+            },
+            {
+                "name": "Change Orders + Extras Tracker",
+                "desc": "Prevent unbilled work; capture approvals."
+            },
+            {
+                "name": "Project Timeline + Next-Step Prompts",
+                "desc": "AI suggests the next action."
+            },
+            {
+                "name": "Invoicing Triggers",
+                "desc": "Milestones, extras, and completion events."
+            }
+        ],
+        "codeComplianceEngine": [
+            {
+                "name": "Jurisdiction-Aware Code Library",
+                "desc": "National, provincial/state, municipal—continuously updated."
+            },
+            {
+                "name": "Machine-Readable Rule Conversion",
+                "desc": "Code sections → verifiable checkpoints."
+            },
+            {
+                "name": "Evidence Verification",
+                "desc": "Design docs, shop drawings, photos, test reports, certifications."
+            },
+            {
+                "name": "Phase-Based Compliance Tracking",
+                "desc": "Design → foundation → framing → MEP → final."
+            },
+            {
+                "name": "Deficiency / Non-Compliance Workflow",
+                "desc": "Issue, assign, verify correction, close."
+            },
+            {
+                "name": "Approval Package Builder",
+                "desc": "Audit-ready packages with rule-to-evidence mapping."
+            },
+            {
+                "name": "Inspector Portal",
+                "desc": "Review queue, field tools, sign-off workflows."
+            }
+        ],
+        "complianceCenter": [
+            {
+                "name": "Permit & Inspection Tracker",
+                "desc": "Status, due dates, reminders, required docs."
+            },
+            {
+                "name": "Safety Documentation",
+                "desc": "Toolbox talks, incident logs, orientation records."
+            },
+            {
+                "name": "QA/QC Checklists",
+                "desc": "Trade sign-offs, photo evidence, timestamped logs."
+            },
+            {
+                "name": "Closeout Package Builder",
+                "desc": "Warranties, manuals, as-builts, sign-offs, certificates."
+            },
+            {
+                "name": "Audit Trail",
+                "desc": "Who/when/what; searchable history with code references."
+            },
+            {
+                "name": "Compliance Reporting",
+                "desc": "Exportable packages for owners, auditors, regulators."
+            }
+        ],
+        "integrations": [
+            {
+                "name": "Airtable",
+                "desc": "Base sync or export."
+            },
+            {
+                "name": "WhatsApp (Twilio)",
+                "desc": "Forward photos + voice notes into the inbox."
+            },
+            {
+                "name": "Exports",
+                "desc": "CSV/PDF for owners, auditors, regulators."
+            },
+            {
+                "name": "QuickBooks",
+                "desc": "Optional."
+            },
+            {
+                "name": "Procore",
+                "desc": "Roadmap."
+            },
+            {
+                "name": "Municipal permitting systems",
+                "desc": "API or manual upload (jurisdiction dependent)."
+            }
+        ]
+    },
+    "buildingCodeCompliancePage": {
+        "definition": "Building code compliance is the systematic process of ensuring that buildings, renovations, and infrastructure meet legal, safety, accessibility, environmental, and performance requirements defined by national, provincial/state, and municipal authorities.",
+        "whatWeDo": "We convert building codes into jurisdiction-aware, machine-readable rules, continuously verify evidence across design, construction, and inspection phases, and produce defensible, audit-ready approvals without replacing human judgment.",
+        "offerings": [
+            "Jurisdiction mapping and code library setup (Alberta Building Code, National Building Code, Calgary bylaws, etc.)",
+            "Rule conversion (code sections → structured verification checkpoints)",
+            "Evidence collection and linking (design documents, test reports, photos, certifications)",
+            "Continuous compliance verification (real-time status per code requirement)",
+            "Inspector collaboration tools (field verification, annotations, sign-offs)",
+            "Non-compliance workflow (flag, document, assign, verify correction)",
+            "Approval package generation (complete, traceable documentation)",
+            "Ongoing code updates (subscription-based library maintenance)"
+        ],
+        "keywords": [
+            "Verifiable",
+            "Defensible",
+            "Traceable",
+            "Jurisdiction-aware",
+            "Continuously updated",
+            "Inspector-approved"
+        ]
+    },
+    "pricing": {
+        "contractors": [
+            {
+                "name": "Per crew",
+                "price": "$200/month per crew",
+                "includes": [
+                    "WhatsApp intake",
+                    "Dashboard",
+                    "Basic automations"
+                ]
+            },
+            {
+                "name": "Per site",
+                "price": "$500–$2,000/month per site",
+                "includes": [
+                    "Document extraction",
+                    "Compliance",
+                    "Advanced workflows"
+                ]
+            }
+        ],
+        "inspectors": [
+            {
+                "name": "Inspector seat",
+                "price": "$200/month per inspector",
+                "includes": [
+                    "Compliance engine",
+                    "Review queue",
+                    "Field verification tools",
+                    "Sign-off workflows"
+                ]
+            },
+            {
+                "name": "Municipality enterprise",
+                "price": "Custom",
+                "includes": [
+                    "Jurisdiction setup",
+                    "Code library",
+                    "API integration",
+                    "Training"
+                ]
+            }
+        ],
+        "addons": [
+            {
+                "name": "Jurisdiction code mapping and setup",
+                "price": "$2,000–$5,000 one-time"
+            },
+            {
+                "name": "Onboarding and training",
+                "price": "$1,500–$3,000"
+            },
+            {
+                "name": "Custom automations and integrations",
+                "price": "Custom"
+            },
+            {
+                "name": "Data migrations",
+                "price": "Custom"
+            }
+        ]
+    },
+    "leadForm": {
+        "fields": [
+            "Name",
+            "Company/Municipality",
+            "Role (contractor/inspector/PM/official)",
+            "Trade/Jurisdiction",
+            "Email",
+            "Phone",
+            "Current tools"
+        ]
+    },
+    "faq": [
+        {
+            "q": "Do you support WhatsApp for contractors?",
+            "a": "Yes—photos and voice notes can be forwarded into the inbox for structured extraction and logging."
+        },
+        {
+            "q": "How accurate is code verification?",
+            "a": "Syne provides rule-to-evidence checkpoints and traceability; final judgment remains with qualified humans."
+        },
+        {
+            "q": "Does it work offline?",
+            "a": "Offline use is on the roadmap."
+        },
+        {
+            "q": "Who owns the data and how is audit trail integrity handled?",
+            "a": "You own your data; the system maintains a tamper-evident activity trail (who/when/what) and preserves attachments."
+        },
+        {
+            "q": "Which jurisdictions are covered?",
+            "a": "Start with Alberta/Calgary; roadmap expands to other provinces."
+        },
+        {
+            "q": "How long does code library mapping setup take?",
+            "a": "Depends on jurisdiction scope and workflows; typical onboarding is days to a couple weeks."
+        },
+        {
+            "q": "How does inspector onboarding work?",
+            "a": "Role-based training plus a guided pilot using real permit sets and a standardized approval package output."
+        }
+    ]
+}
