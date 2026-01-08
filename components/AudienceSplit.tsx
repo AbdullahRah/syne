@@ -24,13 +24,13 @@ export const AudienceSplit = () => {
                         <TabsList className="grid w-full max-w-md grid-cols-2 h-auto p-1 bg-gray-200/50 rounded-full">
                             <TabsTrigger
                                 value="contractors"
-                                className="rounded-full py-3 text-sm font-medium data-[state=active]:bg-white data-[state=active]:text-[#156d95] data-[state=active]:shadow-sm transition-all"
+                                className="rounded-full py-3 text-sm font-medium data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm transition-all"
                             >
                                 Contractors & Trades
                             </TabsTrigger>
                             <TabsTrigger
                                 value="inspectors"
-                                className="rounded-full py-3 text-sm font-medium data-[state=active]:bg-white data-[state=active]:text-[#167E6C] data-[state=active]:shadow-sm transition-all"
+                                className="rounded-full py-3 text-sm font-medium data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-sm transition-all"
                             >
                                 Inspectors & Municipalities
                             </TabsTrigger>
@@ -40,7 +40,7 @@ export const AudienceSplit = () => {
                     <TabsContent value="contractors" className="outline-none">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
                             <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/40">
-                                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-[#156d95]">
+                                <div className="w-12 h-12 bg-black text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" /><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" /><path d="M10 6h4" /><path d="M10 10h4" /><path d="M10 14h4" /><path d="M10 18h4" /></svg>
                                 </div>
                                 <h3 className="text-2xl font-bold text-[#111A4A] mb-2">{content.audiences[0].title}</h3>
@@ -55,7 +55,7 @@ export const AudienceSplit = () => {
                                     ))}
                                 </ul>
 
-                                <Link href="/solutions/contractors" className="text-[#156d95] font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                                <Link href="/solutions/contractors" className="text-black hover:underline transition-all font-bold flex items-center gap-1 hover:gap-2 transition-all">
                                     See contractor solutions <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
@@ -65,7 +65,7 @@ export const AudienceSplit = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     {content.audiences[0].roi.map((item, i) => (
                                         <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                                            <div className="text-[#156d95] font-bold text-sm mb-1">ROI</div>
+                                            <div className="text-black font-bold text-sm mb-1">ROI</div>
                                             <div className="font-medium text-gray-900">{item}</div>
                                         </div>
                                     ))}

@@ -6,10 +6,11 @@ import { Menu, X } from "lucide-react"
 import Link from "next/link"
 
 const navigationLinks = [
-  { name: "Solutions", href: "/solutions/contractors" }, // Defaulting to one of them, or could be a dropdown later
+  { name: "Solutions", href: "/solutions/contractors" },
   { name: "Compliance", href: "/compliance/building-code" },
   { name: "Pricing", href: "/pricing" },
   { name: "Resources", href: "/resources" },
+  { name: "Dashboard", href: "/platform/dashboard" },
 ]
 
 export const PortfolioNavbar = () => {
@@ -35,8 +36,8 @@ export const PortfolioNavbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
+        ? "bg-background/95 backdrop-blur-md shadow-sm"
+        : "bg-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -44,11 +45,11 @@ export const PortfolioNavbar = () => {
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="text-2xl font-bold text-foreground hover:text-primary transition-colors duration-200"
-              style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
+              className="flex items-center gap-2"
             >
-              <span style={{ fontFamily: "Figtree", fontWeight: "800" }}>
-                Syne<sup className="text-primary text-sm align-super">*</sup>
+              <img src="/logo.png" alt="Syne Autonomous" className="h-8 w-auto" />
+              <span className="text-xl font-bold text-foreground" style={{ fontFamily: "Figtree", fontWeight: "800" }}>
+                Syne<span className="text-gray-400 font-light">Autonomous</span>
               </span>
             </Link>
           </div>

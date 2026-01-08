@@ -34,7 +34,7 @@ const stats: StatItem[] = [
   },
   {
     value: "1000+",
-    description: "Organizations using\nAuralink",
+    description: "Organizations using\nSyne Autonomous",
     delay: 0.6,
   },
 ]

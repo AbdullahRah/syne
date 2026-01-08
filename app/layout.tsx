@@ -22,11 +22,10 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "Syne Autonomous | Construction Superintelligence",
+  description: "The Intelligence Layer for Modern Construction.",
   icons: {
-    icon: "/icon.svg",
+    icon: "/logo.png",
   },
 }
 

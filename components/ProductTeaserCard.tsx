@@ -18,17 +18,15 @@ type ProductTeaserCardProps = {
 // @component: ProductTeaserCard
 export const ProductTeaserCard = (props: ProductTeaserCardProps) => {
   const {
-    dailyVolume = "1,430,992,688",
-    dailyVolumeLabel = "DAILY ANALYZED MESSAGES",
-    headline = "The Intelligence Layer for Modern Communication",
-    subheadline = "Auralink connects every call, chat, and meeting into a unified AI layer — delivering real-time insights, tone analysis, and team alignment across your favorite tools.",
-    description = "Trusted by fast-growing teams and enterprises, Auralink powers smarter communication across 1,000+ organizations — with enterprise-grade security, multilingual analysis, and instant emotional detection.",
-    videoSrc = "https://cdn.sanity.io/files/1t8iva7t/production/a2cbbed7c998cf93e7ecb6dae75bab42b13139c2.mp4",
-    posterSrc = "/images/design-mode/9ad78a5534a46e77bafe116ce1c38172c60dc21a-1069x1068.png",
-    primaryButtonText = "Start analyzing",
-    primaryButtonHref = "",
-    secondaryButtonText = "View API Docs",
-    secondaryButtonHref = "",
+    dailyVolume = "85,420",
+    dailyVolumeLabel = "AUTOMATED CODE CHECKS TODAY",
+    headline = "The Intelligence Layer for Modern Construction",
+    subheadline = "Syne Autonomous connects every jobsite, blueprint, and inspector into a unified AI layer — delivering real-time compliance, risk analysis, and team alignment.",
+    description = "Trusted by peak-performing contractors and municipalities, Syne Autonomous powers smarter construction across North America — with automated audit trails and instant code verification.",
+    primaryButtonText = "Book a Demo",
+    primaryButtonHref = "/contact",
+    secondaryButtonText = "Explore Solutions",
+    secondaryButtonHref = "/solutions/contractors",
   } = props
 
   // @return
@@ -127,7 +125,7 @@ export const ProductTeaserCard = (props: ProductTeaserCardProps) => {
                   onClick={(e) => e.preventDefault()}
                   className="block cursor-pointer text-white bg-[#0988f0] rounded-full px-[18px] py-[15px] text-base leading-4 whitespace-nowrap transition-all duration-150 ease-[cubic-bezier(0.455,0.03,0.515,0.955)] hover:rounded-2xl"
                   style={{
-                    background: "#156d95",
+                    background: "black",
                   }}
                 >
                   {primaryButtonText}
@@ -136,7 +134,6 @@ export const ProductTeaserCard = (props: ProductTeaserCardProps) => {
               <li>
                 <a
                   href={secondaryButtonHref}
-                  onClick={(e) => e.preventDefault()}
                   className="block cursor-pointer text-[#202020] border border-[#202020] rounded-full px-[18px] py-[15px] text-base leading-4 whitespace-nowrap transition-all duration-150 ease-[cubic-bezier(0.455,0.03,0.515,0.955)] hover:rounded-2xl"
                 >
                   {secondaryButtonText}
@@ -160,31 +157,14 @@ export const ProductTeaserCard = (props: ProductTeaserCardProps) => {
             className="col-span-12 lg:col-span-6 bg-white rounded-[40px] flex justify-center items-center aspect-square overflow-hidden"
             style={{
               backgroundImage:
-                "url(https://storage.googleapis.com/storage.magicpath.ai/user/282171029206482944/assets/882ef3dd-3459-4fd8-a939-52ceada51d5c.png)",
+                "url(/construction_teaser.jpg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               opacity: "1",
             }}
           >
-            <video
-              src={videoSrc}
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={posterSrc}
-              className="block w-full h-full object-cover"
-              style={{
-                backgroundImage:
-                  "url(https://storage.googleapis.com/storage.magicpath.ai/user/282171029206482944/assets/38855cdf-b40a-445b-a17c-c2bbb35c884e.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                opacity: "1",
-                display: "none",
-              }}
-            />
+            {/* Image Placeholder */}
           </motion.div>
         </div>
       </div>

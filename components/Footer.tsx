@@ -25,58 +25,15 @@ type FooterProps = {
   copyrightText?: string
 }
 
-const defaultSections: FooterSection[] = [
-  {
-    title: "Product",
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "Integrations", href: "#integrations" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "API Docs", href: "#api" },
-      { label: "Changelog", href: "#changelog" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "#about" },
-      { label: "Careers", href: "#careers" },
-      { label: "Blog", href: "#blog" },
-      { label: "Press Kit", href: "#press" },
-      { label: "Contact", href: "#contact" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Documentation", href: "#docs" },
-      { label: "Help Center", href: "#help" },
-      { label: "Community", href: "#community" },
-      { label: "Case Studies", href: "#case-studies" },
-      { label: "Webinars", href: "#webinars" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "#privacy" },
-      { label: "Terms of Service", href: "#terms" },
-      { label: "Security", href: "#security" },
-      { label: "Compliance", href: "#compliance" },
-      { label: "Cookie Policy", href: "#cookies" },
-    ],
-  },
-]
+const defaultSections: FooterSection[] = []
 
 export const Footer = ({
-  companyName = "Auralink",
-  tagline = "The Intelligence Layer for Modern Communication",
+  companyName = "Syne Autonomous",
+  tagline = "Construction Superintelligence.",
   sections = defaultSections,
   socialLinks = {
-    twitter: "https://twitter.com",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    email: "hello@auralink.com",
+    twitter: "https://x.com/syneautonomous",
+    linkedin: "https://www.linkedin.com/company/syneautonomous",
   },
   copyrightText,
 }: FooterProps) => {

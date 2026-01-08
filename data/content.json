@@ -1,7 +1,12 @@
 {
     "brand": {
-        "name": "syne autonomous",
-        "tagline": "Construction Superintelligence",
+        "name": "Syne Autonomous",
+        "productName": "Syne Autonomous",
+        "tagline": "Construction Superintelligence.",
+        "social": {
+            "linkedin": "https://www.linkedin.com/company/syneautonomous",
+            "twitter": "https://x.com/syneautonomous"
+        },
         "positioning": "Your jobsite brain + compliance engine.",
         "credibilityCues": [
             "Built for Alberta contractors.",

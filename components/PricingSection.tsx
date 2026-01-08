@@ -76,7 +76,7 @@ export function PricingSection() {
         <div className="text-center mb-16">
           <h2 className="font-figtree text-[40px] font-normal leading-tight mb-4">Choose Your Plan</h2>
           <p className="font-figtree text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get started with Auralink's communication intelligence platform. All plans include API access and team
+            Get started with Syne Autonomous's communication intelligence platform. All plans include API access and team
             collaboration.
           </p>
         </div>
