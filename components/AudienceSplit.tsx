@@ -40,9 +40,6 @@ export const AudienceSplit = () => {
                     <TabsContent value="contractors" className="outline-none">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
                             <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/40">
-                                <div className="w-12 h-12 bg-black text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" /><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" /><path d="M10 6h4" /><path d="M10 10h4" /><path d="M10 14h4" /><path d="M10 18h4" /></svg>
-                                </div>
                                 <h3 className="text-2xl font-bold text-[#111A4A] mb-2">{content.audiences[0].title}</h3>
                                 <p className="text-gray-600 mb-8">Reduce admin, capture every extra, and never fail an inspection twice.</p>
 
@@ -77,9 +74,6 @@ export const AudienceSplit = () => {
                     <TabsContent value="inspectors" className="outline-none">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
                             <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/40">
-                                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-[#167E6C]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" /></svg>
-                                </div>
                                 <h3 className="text-2xl font-bold text-[#111A4A] mb-2">{content.audiences[1].title}</h3>
                                 <p className="text-gray-600 mb-8">Machine-readable code compliance that augments your expertise, not replaces it.</p>
 

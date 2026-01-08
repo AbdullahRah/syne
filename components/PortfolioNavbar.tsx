@@ -45,12 +45,9 @@ export const PortfolioNavbar = () => {
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-2"
+              className="flex items-center"
             >
-              <img src="/logo.png" alt="Syne Autonomous" className="h-8 w-auto" />
-              <span className="text-xl font-bold text-foreground" style={{ fontFamily: "Figtree", fontWeight: "800" }}>
-                Syne<span className="text-gray-400 font-light">Autonomous</span>
-              </span>
+              <img src="/logo.png" alt="Syne Autonomous" className="h-10 w-auto" />
             </Link>
           </div>
 
