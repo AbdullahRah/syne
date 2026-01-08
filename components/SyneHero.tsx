@@ -7,8 +7,9 @@ import Link from "next/link"
 import content from "@/data/content.json"
 
 export const SyneHero = () => {
-    const [isVisible, setIsVisible] = useState(false)
-    const { productName, tagline, subheadline, primaryCTA } = content.hero
+    const isVisible = true
+    const { productName, tagline } = content.brand
+    const { subheadline, primaryCta } = content.hero
 
     useEffect(() => {
         setIsVisible(true)
@@ -22,7 +23,7 @@ export const SyneHero = () => {
                     <div className="relative z-10">
                         <div className="mb-8">
                             <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-800 ring-1 ring-inset ring-slate-200">
-                                🚀 {tagline}
+                                {tagline}
                             </span>
                         </div>
 

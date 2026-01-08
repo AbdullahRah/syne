@@ -11,10 +11,10 @@ export const AudienceSplit = () => {
         <section className="py-24 bg-gray-50/50">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight text-[#111A4A] sm:text-4xl">
+                    <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
                         Built for the entire project lifecycle
                     </h2>
-                    <p className="mt-4 text-lg text-gray-600">
+                    <p className="mt-4 text-lg text-slate-600">
                         From the jobsite to the inspector's desk, Syne connects the dots.
                     </p>
                 </div>
@@ -64,9 +64,9 @@ export const AudienceSplit = () => {
                                 {/* ROI Cards */}
                                 <div className="grid grid-cols-2 gap-4">
                                     {content.audiences[0].roi.map((item, i) => (
-                                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                                            <div className="text-black font-bold text-sm mb-1">ROI</div>
-                                            <div className="font-medium text-gray-900">{item}</div>
+                                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                                            <div className="font-medium text-gray-900 text-sm leading-tight">{item}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -101,9 +101,9 @@ export const AudienceSplit = () => {
                                 {/* ROI Cards */}
                                 <div className="grid grid-cols-2 gap-4">
                                     {content.audiences[1].roi.map((item, i) => (
-                                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
-                                            <div className="text-[#167E6C] font-bold text-sm mb-1">Impact</div>
-                                            <div className="font-medium text-gray-900">{item}</div>
+                                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                                            <div className="font-medium text-gray-900 text-sm leading-tight">{item}</div>
                                         </div>
                                     ))}
                                 </div>
