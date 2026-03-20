@@ -31,8 +31,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "Twitter", href: "#" },
-  { name: "LinkedIn", href: "#" },
+  { name: "Twitter", href: "https://x.com/syneautonomous" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/syneautonomous" },
 ];
 
 export function FooterSection() {
