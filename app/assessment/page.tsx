@@ -615,16 +615,25 @@ export default function AssessmentPage() {
     // Parse UTM from URL
     const params = new URLSearchParams(window.location.search);
 
-    // Build individual question responses
+    // Build individual question responses with full scoring data
     const responses = questions.map((q, i) => {
       const answerVal = answers[i] ?? 0;
       const selectedOption = q.options.find((o) => o.value === answerVal);
+      const maxScore = Math.max(...q.options.map((o) => o.value));
+      const isGap = answerVal < maxScore;
       return {
-        question: q.topic,
+        questionId: q.id,
+        questionTopic: q.topic,
         answer: selectedOption?.text || "No answer",
-        score: answerVal,
-        maxScore: Math.max(...q.options.map((o) => o.value)),
-        isGap: answerVal < Math.max(...q.options.map((o) => o.value)),
+        answerValue: answerVal,
+        maxPossible: maxScore,
+        pipedaWeight: q.pipedaWeight,
+        insuranceWeight: q.insuranceWeight,
+        pipedaPoints: answerVal * q.pipedaWeight,
+        insurancePoints: answerVal * q.insuranceWeight,
+        isGap,
+        gapText: isGap ? q.gapText : "",
+        principle: q.principle,
       };
     });
 
