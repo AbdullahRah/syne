@@ -1104,14 +1104,15 @@ export default function AssessmentPage() {
             All customized to your business.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              size="lg"
-              className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
-              onClick={() => (window.location.href = "/")}
-            >
-              Get a demo
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
+              >
+                Get a demo
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </a>
             <Button
               size="lg"
               variant="outline"

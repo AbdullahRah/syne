@@ -119,7 +119,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <a href="/assessment">
+            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"

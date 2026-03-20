@@ -76,7 +76,7 @@ export function Navigation() {
                 Free assessment
               </Button>
             </a>
-            <a href="/assessment">
+            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
               <Button
                 size="sm"
                 className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
@@ -147,7 +147,7 @@ export function Navigation() {
                 Free assessment
               </Button>
             </a>
-            <a href="/assessment" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 className="w-full bg-foreground text-background rounded-full h-14 text-base"
               >

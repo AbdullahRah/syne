@@ -65,7 +65,7 @@ export function CtaSection() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <a href="/assessment">
+                  <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
                     <Button
                       size="lg"
                       className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
