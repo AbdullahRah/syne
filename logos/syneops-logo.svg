@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" width="240" height="48">
+  <!-- syneOps Logo — Unified Square Mark -->
+  <g transform="translate(0, 4)">
+    <!-- Primary L-shape (solid) -->
+    <path d="M0 0 H13 V28 H28 V15 H0 Z" fill="#1A1A1A"/>
+    <!-- Secondary L-shape (lighter) -->
+    <path d="M28 28 H15 V0 H0 V13 H28 Z" fill="#1A1A1A" opacity="0.45"/>
+  </g>
+  <!-- Wordmark -->
+  <text font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.5" fill="#1A1A1A" x="42" y="32">syneOps</text>
+</svg>

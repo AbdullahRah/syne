@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- syneOps Icon Mark -->
+  <g transform="translate(2, 2)">
+    <path d="M0 0 H13 V28 H28 V15 H0 Z" fill="#1A1A1A"/>
+    <path d="M28 28 H15 V0 H0 V13 H28 Z" fill="#1A1A1A" opacity="0.45"/>
+  </g>
+</svg>
