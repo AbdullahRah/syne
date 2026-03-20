@@ -931,7 +931,7 @@ export default function AssessmentPage() {
                   <option value="Financial Services">Financial Services</option>
                   <option value="Healthcare">Healthcare</option>
                   <option value="Professional Services">Professional Services</option>
-                  <option value="Technology / SaaS">Technology / SaaS</option>
+                  <option value="Technology/SaaS">Technology / SaaS</option>
                   <option value="Energy & Resources">Energy & Resources</option>
                   <option value="Construction & Trades">Construction & Trades</option>
                   <option value="Retail">Retail</option>

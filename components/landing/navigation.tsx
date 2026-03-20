@@ -44,7 +44,7 @@ export function Navigation() {
           }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="/" className="flex items-center gap-2 group">
             <span className={`font-display tracking-tight transition-all duration-500 ${isScrolled ? "text-xl" : "text-2xl"}`}>syneOps</span>
           </a>
 
@@ -67,18 +67,23 @@ export function Navigation() {
             <a href="#" className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}>
               Login
             </a>
-            <a
-              href="/assessment"
-              className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}
-            >
-              Free assessment
+            <a href="/assessment">
+              <Button
+                size="sm"
+                variant="outline"
+                className={`rounded-full border-foreground/20 hover:bg-foreground/5 transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
+              >
+                Free assessment
+              </Button>
             </a>
-            <Button
-              size="sm"
-              className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
-            >
-              Get a demo
-            </Button>
+            <a href="/assessment">
+              <Button
+                size="sm"
+                className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
+              >
+                Get a demo
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,19 +139,21 @@ export function Navigation() {
           }`}
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <Button
-              variant="outline"
-              className="flex-1 rounded-full h-14 text-base"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Login
-            </Button>
-            <Button
-              className="flex-1 bg-foreground text-background rounded-full h-14 text-base"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Get a demo
-            </Button>
+            <a href="/assessment" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="outline"
+                className="w-full rounded-full h-14 text-base"
+              >
+                Free assessment
+              </Button>
+            </a>
+            <a href="/assessment" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                className="w-full bg-foreground text-background rounded-full h-14 text-base"
+              >
+                Get a demo
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ const footerLinks = {
     { name: "Blog", href: "#" },
     { name: "PIPEDA Checklist", href: "#" },
     { name: "Bill C-27 Guide", href: "#" },
-    { name: "Free Assessment", href: "#" },
+    { name: "Free Assessment", href: "/assessment" },
   ],
   Company: [
     { name: "About", href: "#" },

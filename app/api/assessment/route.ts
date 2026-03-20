@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     const utmCampaign = body.utmCampaign || "";
 
     const record = {
+      typecast: true,
       records: [
         {
           fields: {
