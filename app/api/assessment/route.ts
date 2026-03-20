@@ -30,33 +30,62 @@ export async function POST(req: NextRequest) {
     const utmMedium = body.utmMedium || "";
     const utmCampaign = body.utmCampaign || "";
 
+    // Build notes from individual question responses
+    let notes = "";
+    if (body.responses && Array.isArray(body.responses)) {
+      const gapItems = body.responses.filter(
+        (r: { isGap: boolean }) => r.isGap
+      );
+      if (gapItems.length > 0) {
+        notes = `Gaps: ${gapItems
+          .map(
+            (r: { question: string; score: number; maxScore: number }) =>
+              `${r.question} (${r.score}/${r.maxScore})`
+          )
+          .join(", ")}`;
+      }
+    }
+
+    const fields: Record<string, unknown> = {
+      "Company Name": body.companyName || "",
+      "Contact First Name": body.firstName || "",
+      "Contact Last Name": body.lastName || "",
+      "Contact Email": body.email || "",
+      Industry: body.industry || undefined,
+      "Company Size": body.companySize || undefined,
+      "PIPEDA Score": body.pipedaScore || 0,
+      "PIPEDA Grade": body.pipedaGrade || undefined,
+      "Insurance Score": body.insuranceScore || 0,
+      "Insurance Grade": body.insuranceGrade || undefined,
+      "Total Gaps": body.totalGaps || 0,
+      "Assessment Date": today,
+      Source: utmSource || "Website",
+      "Lead Status": "New",
+      "Lead Temperature": temperature,
+      "Follow-Up Date": followUpDate,
+    };
+
+    // Add optional fields only if they have values
+    if (body.phone) fields["Contact Phone"] = body.phone;
+    if (body.jobTitle) fields["Contact Job Title"] = body.jobTitle;
+    if (body.website) fields["Website"] = body.website;
+    if (body.province) fields["Province"] = body.province;
+    if (body.city) fields["City"] = body.city;
+    if (utmCampaign) fields["UTM Campaign"] = utmCampaign;
+    if (utmSource) fields["UTM Source"] = utmSource;
+    if (utmMedium) fields["UTM Medium"] = utmMedium;
+    if (notes) fields["Notes"] = notes;
+
+    // Remove undefined values
+    Object.keys(fields).forEach((key) => {
+      if (fields[key] === undefined || fields[key] === "") {
+        delete fields[key];
+      }
+    });
+
     const record = {
       typecast: true,
-      records: [
-        {
-          fields: {
-            "Company Name": body.companyName || "",
-            "Contact First Name": body.firstName || "",
-            "Contact Last Name": body.lastName || "",
-            "Contact Email": body.email || "",
-            Industry: body.industry || "",
-            "Company Size": body.companySize || "",
-            "PIPEDA Score": body.pipedaScore || 0,
-            "PIPEDA Grade": body.pipedaGrade || "",
-            "Insurance Score": body.insuranceScore || 0,
-            "Insurance Grade": body.insuranceGrade || "",
-            "Total Gaps": body.totalGaps || 0,
-            "Assessment Date": today,
-            Source: utmSource ? `${utmSource}` : "Website",
-            "UTM Campaign": utmCampaign,
-            "UTM Source": utmSource,
-            "UTM Medium": utmMedium,
-            "Lead Status": "New",
-            "Lead Temperature": temperature,
-            "Follow-Up Date": followUpDate,
-          },
-        },
-      ],
+      records: [{ fields }],
     };
 
     const airtableRes = await fetch(

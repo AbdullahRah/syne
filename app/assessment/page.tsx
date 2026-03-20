@@ -538,8 +538,13 @@ export default function AssessmentPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
   const [industry, setIndustry] = useState("");
   const [companySize, setCompanySize] = useState("");
+  const [province, setProvince] = useState("");
+  const [city, setCity] = useState("");
+  const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -610,6 +615,19 @@ export default function AssessmentPage() {
     // Parse UTM from URL
     const params = new URLSearchParams(window.location.search);
 
+    // Build individual question responses
+    const responses = questions.map((q, i) => {
+      const answerVal = answers[i] ?? 0;
+      const selectedOption = q.options.find((o) => o.value === answerVal);
+      return {
+        question: q.topic,
+        answer: selectedOption?.text || "No answer",
+        score: answerVal,
+        maxScore: Math.max(...q.options.map((o) => o.value)),
+        isGap: answerVal < Math.max(...q.options.map((o) => o.value)),
+      };
+    });
+
     try {
       await fetch("/api/assessment", {
         method: "POST",
@@ -619,13 +637,19 @@ export default function AssessmentPage() {
           firstName,
           lastName,
           email,
+          phone,
+          jobTitle,
           industry,
           companySize,
+          province,
+          city,
+          website,
           pipedaScore,
           pipedaGrade: getGrade(pipedaScore),
           insuranceScore,
           insuranceGrade: getGrade(insuranceScore),
           totalGaps: gaps.length,
+          responses,
           utmSource: params.get("utm_source") || "",
           utmMedium: params.get("utm_medium") || "",
           utmCampaign: params.get("utm_campaign") || "",
@@ -862,6 +886,7 @@ export default function AssessmentPage() {
             </div>
 
             <div className="space-y-6">
+              {/* Name */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-mono text-muted-foreground mb-2">
@@ -890,70 +915,154 @@ export default function AssessmentPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Work email *
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                  placeholder="tariq@company.ca"
-                  required
-                />
+              {/* Email + Phone */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Work email *
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
+                    placeholder="tariq@company.ca"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
+                    placeholder="403-555-0142"
+                  />
+                </div>
               </div>
 
+              {/* Company + Job Title */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Company name *
+                  </label>
+                  <input
+                    type="text"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
+                    placeholder="Apex Drilling Ltd"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Job title
+                  </label>
+                  <input
+                    type="text"
+                    value={jobTitle}
+                    onChange={(e) => setJobTitle(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
+                    placeholder="Operations Manager"
+                  />
+                </div>
+              </div>
+
+              {/* Website */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Company name *
+                  Company website
                 </label>
                 <input
                   type="text"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
                   className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                  placeholder="Apex Drilling Ltd"
-                  required
+                  placeholder="apexdrilling.ca"
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Industry
-                </label>
-                <select
-                  value={industry}
-                  onChange={(e) => setIndustry(e.target.value)}
-                  className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
-                >
-                  <option value="">Select industry</option>
-                  <option value="Financial Services">Financial Services</option>
-                  <option value="Healthcare">Healthcare</option>
-                  <option value="Professional Services">Professional Services</option>
-                  <option value="Technology/SaaS">Technology / SaaS</option>
-                  <option value="Energy & Resources">Energy & Resources</option>
-                  <option value="Construction & Trades">Construction & Trades</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Other">Other</option>
-                </select>
+              {/* Industry + Size */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Industry
+                  </label>
+                  <select
+                    value={industry}
+                    onChange={(e) => setIndustry(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
+                  >
+                    <option value="">Select industry</option>
+                    <option value="Financial Services">Financial Services</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Professional Services">Professional Services</option>
+                    <option value="Technology/SaaS">Technology / SaaS</option>
+                    <option value="Energy & Resources">Energy & Resources</option>
+                    <option value="Construction & Trades">Construction & Trades</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Number of employees
+                  </label>
+                  <select
+                    value={companySize}
+                    onChange={(e) => setCompanySize(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
+                  >
+                    <option value="">Select size</option>
+                    <option value="1-10">1-10</option>
+                    <option value="11-50">11-50</option>
+                    <option value="51-200">51-200</option>
+                    <option value="200+">200+</option>
+                  </select>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Number of employees
-                </label>
-                <select
-                  value={companySize}
-                  onChange={(e) => setCompanySize(e.target.value)}
-                  className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
-                >
-                  <option value="">Select size</option>
-                  <option value="1-10">1-10</option>
-                  <option value="11-50">11-50</option>
-                  <option value="51-200">51-200</option>
-                  <option value="200+">200+</option>
-                </select>
+              {/* Province + City */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    Province
+                  </label>
+                  <select
+                    value={province}
+                    onChange={(e) => setProvince(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
+                  >
+                    <option value="">Select province</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-mono text-muted-foreground mb-2">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
+                    placeholder="Calgary"
+                  />
+                </div>
               </div>
 
               <Button
