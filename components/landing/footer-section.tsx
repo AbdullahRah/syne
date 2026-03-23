@@ -27,6 +27,7 @@ const footerLinks = {
     { name: "Pricing", href: "#pricing" },
     { name: "Contact", href: "#" },
     { name: "Privacy Policy", href: "#" },
+    { name: "Disclaimer", href: "/disclaimer" },
   ],
 };
 
@@ -106,6 +107,8 @@ export function FooterSection() {
             <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
             <span className="text-foreground/20">|</span>
             <a href="#" className="hover:text-foreground transition-colors">Cookies</a>
+            <span className="text-foreground/20">|</span>
+            <a href="/disclaimer" className="hover:text-foreground transition-colors">Disclaimer</a>
           </div>
         </div>
       </div>
