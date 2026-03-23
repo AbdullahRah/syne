@@ -380,6 +380,45 @@ const questions: Question[] = [
 const PIPEDA_MAX = 28.2;
 const INSURANCE_MAX = 25.5;
 
+// ─── Airtable Config ──────────────────────────────────────────────────────────
+
+const AIRTABLE_BASE_URL = "https://api.airtable.com/v0/appznJPpAPzTYzoI2";
+const AIRTABLE_TOKEN = process.env.NEXT_PUBLIC_AIRTABLE_TOKEN || "";
+
+const QUESTION_RECORD_IDS: Record<number, string> = {
+  1: "recP8yi0IvueTsyKe",
+  2: "recExb6X6VPeuGqqD",
+  3: "recR0OqxpcMLMCQ0R",
+  4: "recpnKp20oWnvDOIQ",
+  5: "rec6IsQpoHhUserfB",
+  6: "rec5RBwviOUWlJXDJ",
+  7: "recACi4Vlxy9ECGLU",
+  8: "rec7ZSvGae4Ire8Pa",
+  9: "rechCGxiDAu3ertxb",
+  10: "reciEdSeEaFKCFSYN",
+  11: "recItIWbahLo6ArSW",
+  12: "rec0cstUG77jib2oO",
+};
+
+function parsePrinciples(principle: string): string[] {
+  const principles: string[] = [];
+  if (principle.includes("10.1") || principle.includes("s.10.1")) {
+    principles.push("S10.1 Breach Reporting");
+  }
+  if (principle.includes("10.3") || principle.includes("s.10.3")) {
+    principles.push("S10.3 Record Keeping");
+  }
+  if (/\b1\b/.test(principle) && !principle.includes("10")) principles.push("P1 Accountability");
+  if (/\b2\b/.test(principle) && !principle.includes("10")) principles.push("P2 Purposes");
+  if (/\b3\b/.test(principle)) principles.push("P3 Consent");
+  if (/\b4\b/.test(principle)) principles.push("P4 Limiting Collection");
+  if (/\b5\b/.test(principle)) principles.push("P5 Limiting Use");
+  if (/\b7\b/.test(principle)) principles.push("P7 Safeguards");
+  if (/\b8\b/.test(principle)) principles.push("P8 Openness");
+  if (/\b9\b/.test(principle)) principles.push("P9 Individual Access");
+  return principles;
+}
+
 function getGrade(score: number): string {
   if (score >= 85) return "A";
   if (score >= 70) return "B";
@@ -612,11 +651,28 @@ export default function AssessmentPage() {
     const { pipedaScore, insuranceScore } = calculateScores();
     const gaps = getGaps();
 
-    // Parse UTM from URL
     const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get("utm_source") || "";
+    const utmMedium = params.get("utm_medium") || "";
+    const utmCampaign = params.get("utm_campaign") || "";
 
-    // Build individual question responses with full scoring data
-    const responses = questions.map((q, i) => {
+    const headers = {
+      Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+      "Content-Type": "application/json",
+    };
+
+    const today = new Date().toISOString().split("T")[0];
+    const followUpDate = new Date(Date.now() + 3 * 86400000).toISOString().split("T")[0];
+
+    let temperature = "Warm";
+    if (pipedaScore <= 50 || insuranceScore <= 50) {
+      temperature = "Hot";
+    } else if (pipedaScore >= 80 && insuranceScore >= 80) {
+      temperature = "Cold";
+    }
+
+    // Build response data for each question
+    const responseData = questions.map((q, i) => {
       const answerVal = answers[i] ?? 0;
       const selectedOption = q.options.find((o) => o.value === answerVal);
       const maxScore = Math.max(...q.options.map((o) => o.value));
@@ -637,33 +693,94 @@ export default function AssessmentPage() {
       };
     });
 
+    // Build notes from gaps
+    const gapItems = responseData.filter((r) => r.isGap);
+    const notes = gapItems.length > 0
+      ? `Gaps: ${gapItems.map((r) => `${r.questionTopic} (${r.answerValue}/${r.maxPossible})`).join(", ")}`
+      : "";
+
     try {
-      await fetch("/api/assessment", {
+      // Step 1: Create Lead record
+      const leadFields: Record<string, unknown> = {
+        "Company Name": companyName,
+        "Contact First Name": firstName,
+        "Contact Email": email,
+        "PIPEDA Score": pipedaScore,
+        "PIPEDA Grade": getGrade(pipedaScore),
+        "Insurance Score": insuranceScore,
+        "Insurance Grade": getGrade(insuranceScore),
+        "Total Gaps": gaps.length,
+        "Assessment Date": today,
+        Source: utmSource || "Website",
+        "Lead Status": "New",
+        "Lead Temperature": temperature,
+        "Follow-Up Date": followUpDate,
+      };
+
+      if (lastName) leadFields["Contact Last Name"] = lastName;
+      if (phone) leadFields["Contact Phone"] = phone;
+      if (jobTitle) leadFields["Contact Job Title"] = jobTitle;
+      if (website) leadFields["Website"] = website;
+      if (industry) leadFields["Industry"] = industry;
+      if (companySize) leadFields["Company Size"] = companySize;
+      if (province) leadFields["Province"] = province;
+      if (city) leadFields["City"] = city;
+      if (utmCampaign) leadFields["UTM Campaign"] = utmCampaign;
+      if (utmSource) leadFields["UTM Source"] = utmSource;
+      if (utmMedium) leadFields["UTM Medium"] = utmMedium;
+      if (notes) leadFields["Notes"] = notes;
+
+      const leadRes = await fetch(`${AIRTABLE_BASE_URL}/Leads`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          companyName,
-          firstName,
-          lastName,
-          email,
-          phone,
-          jobTitle,
-          industry,
-          companySize,
-          province,
-          city,
-          website,
-          pipedaScore,
-          pipedaGrade: getGrade(pipedaScore),
-          insuranceScore,
-          insuranceGrade: getGrade(insuranceScore),
-          totalGaps: gaps.length,
-          responses,
-          utmSource: params.get("utm_source") || "",
-          utmMedium: params.get("utm_medium") || "",
-          utmCampaign: params.get("utm_campaign") || "",
-        }),
+        headers,
+        body: JSON.stringify({ typecast: true, records: [{ fields: leadFields }] }),
       });
+
+      if (!leadRes.ok) {
+        console.error("Airtable Lead error:", await leadRes.text());
+      } else {
+        const leadData = await leadRes.json();
+        const leadRecordId = leadData.records[0].id;
+
+        // Step 2: Create Response records
+        const responseRecords = responseData.map((r) => {
+          const fields: Record<string, unknown> = {
+            Lead: [leadRecordId],
+            "Company Name": companyName,
+            "Question Topic": r.questionTopic,
+            "Answer Value": r.answerValue,
+            "Max Possible": r.maxPossible,
+            "Answer Text": r.answer,
+            "PIPEDA Weight": r.pipedaWeight,
+            "Insurance Weight": r.insuranceWeight,
+            "PIPEDA Points": r.pipedaPoints,
+            "Insurance Points": r.insurancePoints,
+            "Is Gap": r.isGap ? "YES" : "NO",
+          };
+
+          const questionRecordId = QUESTION_RECORD_IDS[r.questionId];
+          if (questionRecordId) fields["Question"] = [questionRecordId];
+          if (r.isGap && r.gapText) fields["Gap Text"] = r.gapText;
+
+          const principles = parsePrinciples(r.principle);
+          if (principles.length > 0) fields["PIPEDA Principle"] = principles;
+
+          return { fields };
+        });
+
+        // Airtable max 10 records per request
+        for (let i = 0; i < responseRecords.length; i += 10) {
+          const batch = responseRecords.slice(i, i + 10);
+          const respRes = await fetch(`${AIRTABLE_BASE_URL}/Responses`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({ typecast: true, records: batch }),
+          });
+          if (!respRes.ok) {
+            console.error("Airtable Responses batch error:", await respRes.text());
+          }
+        }
+      }
     } catch (e) {
       console.error("Failed to submit to Airtable:", e);
     }
