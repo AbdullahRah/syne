@@ -380,6 +380,8 @@ const questions: Question[] = [
 const PIPEDA_MAX = 28.2;
 const INSURANCE_MAX = 25.5;
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
 function getGrade(score: number): string {
   if (score >= 85) return "A";
   if (score >= 70) return "B";
@@ -522,7 +524,7 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
 
 // ─── Main Assessment Page ────────────────────────────────────────────────────
 
-type Phase = "intro" | "questions" | "email-gate" | "results";
+type Phase = "intro" | "questions" | "lead-capture" | "results";
 
 export default function AssessmentPage() {
   const [phase, setPhase] = useState<Phase>("intro");
@@ -532,25 +534,46 @@ export default function AssessmentPage() {
   );
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
-  // Email gate fields
-  const [companyName, setCompanyName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [companySize, setCompanySize] = useState("");
-  const [province, setProvince] = useState("");
-  const [city, setCity] = useState("");
-  const [website, setWebsite] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [tallySubmitted, setTallySubmitted] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // Listen for Tally form submission via postMessage
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (typeof event.data === "string") {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.event === "Tally.FormSubmitted") {
+            setTallySubmitted(true);
+          }
+        } catch {
+          // Not a JSON message, ignore
+        }
+      }
+      if (typeof event.data === "object" && event.data?.event === "Tally.FormSubmitted") {
+        setTallySubmitted(true);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
+  // Load Tally embed script when entering lead-capture phase
+  useEffect(() => {
+    if (phase === "lead-capture") {
+      const script = document.createElement("script");
+      script.src = "https://tally.so/widgets/embed.js";
+      script.async = true;
+      document.head.appendChild(script);
+      return () => {
+        document.head.removeChild(script);
+      };
+    }
+  }, [phase]);
 
   // Scoring
   const calculateScores = useCallback(() => {
@@ -589,7 +612,7 @@ export default function AssessmentPage() {
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
-        setPhase("email-gate");
+        setPhase("lead-capture");
       }
       setIsTransitioning(false);
     }, 300);
@@ -605,71 +628,7 @@ export default function AssessmentPage() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!companyName || !email || !firstName) return;
-    setIsSubmitting(true);
-
-    const { pipedaScore, insuranceScore } = calculateScores();
-    const gaps = getGaps();
-
-    // Parse UTM from URL
-    const params = new URLSearchParams(window.location.search);
-
-    // Build individual question responses with full scoring data
-    const responses = questions.map((q, i) => {
-      const answerVal = answers[i] ?? 0;
-      const selectedOption = q.options.find((o) => o.value === answerVal);
-      const maxScore = Math.max(...q.options.map((o) => o.value));
-      const isGap = answerVal < maxScore;
-      return {
-        questionId: q.id,
-        questionTopic: q.topic,
-        answer: selectedOption?.text || "No answer",
-        answerValue: answerVal,
-        maxPossible: maxScore,
-        pipedaWeight: q.pipedaWeight,
-        insuranceWeight: q.insuranceWeight,
-        pipedaPoints: answerVal * q.pipedaWeight,
-        insurancePoints: answerVal * q.insuranceWeight,
-        isGap,
-        gapText: isGap ? q.gapText : "",
-        principle: q.principle,
-      };
-    });
-
-    try {
-      await fetch("/api/assessment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          companyName,
-          firstName,
-          lastName,
-          email,
-          phone,
-          jobTitle,
-          industry,
-          companySize,
-          province,
-          city,
-          website,
-          pipedaScore,
-          pipedaGrade: getGrade(pipedaScore),
-          insuranceScore,
-          insuranceGrade: getGrade(insuranceScore),
-          totalGaps: gaps.length,
-          responses,
-          utmSource: params.get("utm_source") || "",
-          utmMedium: params.get("utm_medium") || "",
-          utmCampaign: params.get("utm_campaign") || "",
-        }),
-      });
-    } catch (e) {
-      console.error("Failed to submit to Airtable:", e);
-    }
-
-    setSubmitted(true);
-    setIsSubmitting(false);
+  const handleViewResults = () => {
     setIsTransitioning(true);
     setTimeout(() => {
       setPhase("results");
@@ -859,9 +818,9 @@ export default function AssessmentPage() {
     );
   }
 
-  // ─── Email Gate ────────────────────────────────────────────────────────────
+  // ─── Lead Capture — Tally Form ─────────────────────────────────────────────
 
-  if (phase === "email-gate") {
+  if (phase === "lead-capture") {
     return (
       <main className="relative min-h-screen noise-overlay">
         <nav className="max-w-[1400px] mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -870,7 +829,7 @@ export default function AssessmentPage() {
           </a>
         </nav>
 
-        <div className="max-w-xl mx-auto px-6 lg:px-12 py-24 lg:py-32">
+        <div className="max-w-2xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
           <div
             className={`transition-all duration-300 ${
               isTransitioning
@@ -878,216 +837,64 @@ export default function AssessmentPage() {
                 : "opacity-100 translate-y-0"
             }`}
           >
-            <div className="mb-12">
+            {/* Header */}
+            <div className="mb-8 text-center">
               <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
                 <span className="w-8 h-px bg-foreground/30" />
                 Assessment Complete
+                <span className="w-8 h-px bg-foreground/30" />
               </span>
-              <h2 className="text-4xl lg:text-5xl font-display tracking-tight mb-6">
+              <h2 className="text-4xl lg:text-5xl font-display tracking-tight mb-4">
                 Your scores
                 <br />
                 are ready.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Enter your details to see your PIPEDA Compliance Score, Insurance
-                Readiness Score, and personalized gap report.
+                Enter your details below to unlock your PIPEDA Compliance Score,
+                Insurance Readiness Score, and personalized gap report.
               </p>
             </div>
 
-            <div className="space-y-6">
-              {/* Name */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    First name *
-                  </label>
-                  <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="Tariq"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Last name
-                  </label>
-                  <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="Hassan"
-                  />
-                </div>
-              </div>
-
-              {/* Email + Phone */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Work email *
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="tariq@company.ca"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="403-555-0142"
-                  />
-                </div>
-              </div>
-
-              {/* Company + Job Title */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Company name *
-                  </label>
-                  <input
-                    type="text"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="Apex Drilling Ltd"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Job title
-                  </label>
-                  <input
-                    type="text"
-                    value={jobTitle}
-                    onChange={(e) => setJobTitle(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="Operations Manager"
-                  />
-                </div>
-              </div>
-
-              {/* Website */}
-              <div>
-                <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Company website
-                </label>
-                <input
-                  type="text"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                  className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                  placeholder="apexdrilling.ca"
-                />
-              </div>
-
-              {/* Industry + Size */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Industry
-                  </label>
-                  <select
-                    value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
-                  >
-                    <option value="">Select industry</option>
-                    <option value="Financial Services">Financial Services</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Professional Services">Professional Services</option>
-                    <option value="Technology/SaaS">Technology / SaaS</option>
-                    <option value="Energy & Resources">Energy & Resources</option>
-                    <option value="Construction & Trades">Construction & Trades</option>
-                    <option value="Retail">Retail</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Number of employees
-                  </label>
-                  <select
-                    value={companySize}
-                    onChange={(e) => setCompanySize(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
-                  >
-                    <option value="">Select size</option>
-                    <option value="1-10">1-10</option>
-                    <option value="11-50">11-50</option>
-                    <option value="51-200">51-200</option>
-                    <option value="200+">200+</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Province + City */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    Province
-                  </label>
-                  <select
-                    value={province}
-                    onChange={(e) => setProvince(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground appearance-none"
-                  >
-                    <option value="">Select province</option>
-                    <option value="Alberta">Alberta</option>
-                    <option value="British Columbia">British Columbia</option>
-                    <option value="Manitoba">Manitoba</option>
-                    <option value="New Brunswick">New Brunswick</option>
-                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                    <option value="Nova Scotia">Nova Scotia</option>
-                    <option value="Ontario">Ontario</option>
-                    <option value="Prince Edward Island">Prince Edward Island</option>
-                    <option value="Quebec">Quebec</option>
-                    <option value="Saskatchewan">Saskatchewan</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-mono text-muted-foreground mb-2">
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-foreground/10 focus:border-foreground/30 focus:outline-none transition-colors text-foreground"
-                    placeholder="Calgary"
-                  />
-                </div>
-              </div>
-
-              <Button
-                size="lg"
-                className="w-full bg-foreground hover:bg-foreground/90 text-background h-14 text-base rounded-full group mt-4"
-                onClick={handleSubmit}
-                disabled={!companyName || !email || !firstName || isSubmitting}
-              >
-                {isSubmitting ? "Processing..." : "View My Scores"}
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-
-              <p className="text-sm text-muted-foreground text-center font-mono">
-                Your data stays private. We practice what we preach.
-              </p>
+            {/* Tally Form Embed */}
+            <div className="relative w-full border border-foreground/10 bg-background overflow-hidden" style={{ minHeight: "500px" }}>
+              <iframe
+                data-tally-src="https://tally.so/r/A72OyD?transparentBackground=1"
+                width="100%"
+                height="500"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+                title="Get Your Results"
+                className="border-0"
+              />
             </div>
+
+            {/* View Results Button — appears after Tally submission */}
+            {tallySubmitted && (
+              <div className="mt-8 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <Button
+                  size="lg"
+                  className="bg-foreground hover:bg-foreground/90 text-background px-10 h-14 text-base rounded-full group"
+                  onClick={handleViewResults}
+                >
+                  View My Scores
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
+            )}
+
+            {/* Skip / manual unlock in case Tally message doesn't fire */}
+            {!tallySubmitted && (
+              <p className="text-center mt-6">
+                <button
+                  type="button"
+                  onClick={handleViewResults}
+                  className="text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors font-mono underline underline-offset-4"
+                >
+                  Already submitted? Click here to view scores
+                </button>
+              </p>
+            )}
           </div>
         </div>
       </main>
@@ -1180,7 +987,7 @@ export default function AssessmentPage() {
             </div>
 
             <div className="space-y-4">
-              {gaps.map((gap, i) => (
+              {gaps.map((gap) => (
                 <details
                   key={gap.id}
                   className="group border border-foreground/10 hover:border-foreground/20 transition-colors"

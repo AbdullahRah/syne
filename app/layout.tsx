@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   title: 'syneOps - PIPEDA Compliance & Cyber Insurance Readiness',
   description: 'The only platform that combines Canadian privacy law compliance, cyber insurance documentation, and incident response in one place. One assessment. Two scores. Complete compliance pack.',
   generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-dark-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
