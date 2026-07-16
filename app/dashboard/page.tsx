@@ -102,6 +102,15 @@ export default async function DashboardPage({
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
+                          <a href={`/dashboard/screens/${screen.id}`}>
+                            <Button
+                              type="button"
+                              size="sm"
+                              className="rounded-full text-xs"
+                            >
+                              Manage content
+                            </Button>
+                          </a>
                           <form action={resetToken}>
                             <input type="hidden" name="screen_id" value={screen.id} />
                             <Button
