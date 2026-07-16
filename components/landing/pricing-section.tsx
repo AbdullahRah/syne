@@ -5,50 +5,50 @@ import { ArrowRight, Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Free",
-    description: "See where you stand",
-    price: { monthly: 0, annual: 0 },
+    name: "Starter",
+    description: "One location, a few screens",
+    price: { monthly: 29, annual: 24 },
     features: [
-      "PIPEDA compliance score",
-      "Insurance readiness score",
-      "Personalized gap report",
-      "12-question assessment",
+      "1 location",
+      "Up to 3 screens",
+      "Image & PDF uploads",
+      "5 GB media storage",
+      "Playlist builder",
+      "Phone & laptop dashboard",
+      "Self-updating displays",
     ],
-    cta: "Start free assessment",
+    cta: "Get a demo",
     popular: false,
   },
   {
-    name: "Starter",
-    description: "Get compliant fast",
-    price: { monthly: 49, annual: 41 },
+    name: "Growth",
+    description: "Multiple screens, video included",
+    price: { monthly: 59, annual: 49 },
     features: [
-      "Everything in Free",
-      "Full PIPEDA document pack",
-      "Privacy Policy generator",
-      "Breach Response Plan",
-      "Consent Framework",
-      "Data Inventory Template",
-      "8 cyber insurance policy documents",
-      "All customized to your business",
+      "Everything in Starter",
+      "Up to 3 locations",
+      "Up to 10 screens",
+      "Video uploads",
+      "25 GB media storage",
+      "Per-screen playlists",
+      "Instant link reset & revoke",
     ],
-    cta: "Start free trial",
+    cta: "Get a demo",
     popular: true,
   },
   {
-    name: "Pro",
-    description: "Stay compliant always",
-    price: { monthly: 99, annual: 83 },
+    name: "Multi",
+    description: "Every location, one dashboard",
+    price: { monthly: 99, annual: 82 },
     features: [
-      "Everything in Starter",
-      "Quarterly re-assessment",
-      "Regulatory change alerts",
-      "Bill C-27 update tracking",
-      "Score tracking over time",
-      "Insurance renewal prep toolkit",
-      "Vendor risk module",
+      "Everything in Growth",
+      "Unlimited locations",
+      "Up to 30 screens",
+      "100 GB media storage",
+      "Multi-location management",
       "Priority support",
     ],
-    cta: "Start free trial",
+    cta: "Get a demo",
     popular: false,
   },
 ];
@@ -65,12 +65,12 @@ export function PricingSection() {
             Pricing
           </span>
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground mb-6">
-            Flexible plans for
+            Priced per screen,
             <br />
-            <span className="text-stroke">every business</span>
+            <span className="text-stroke">not per headache</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl">
-            From free assessment to full compliance platform. No contracts. Cancel anytime.
+            Runs on hardware you already own. No contracts, no setup fees. Cancel anytime.
           </p>
         </div>
 
@@ -153,7 +153,9 @@ export function PricingSection() {
 
               {/* CTA */}
               <a
-                href="/assessment"
+                href="https://cal.com/staqtech/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`w-full py-4 flex items-center justify-center gap-2 text-sm font-medium transition-all group ${
                   plan.popular
                     ? "bg-foreground text-primary-foreground hover:bg-foreground/90"
@@ -169,9 +171,10 @@ export function PricingSection() {
 
         {/* Bottom Note */}
         <p className="mt-12 text-center text-sm text-muted-foreground">
-          All plans include data privacy and encryption. No credit card required for free tier.{" "}
-          <a href="#" className="underline underline-offset-4 hover:text-foreground transition-colors">
-            Compare all features
+          Every screen gets its own private, revocable link and self-updates over the air.
+          Need more screens or locations?{" "}
+          <a href="https://cal.com/staqtech/30min" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground transition-colors">
+            Talk to us
           </a>
         </p>
       </div>

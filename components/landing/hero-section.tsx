@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSphere } from "./animated-sphere";
 
-const words = ["comply", "insure", "protect", "document"];
+const words = ["upload", "schedule", "display", "update"];
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -64,7 +64,7 @@ export function HeroSection() {
         >
           <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground">
             <span className="w-8 h-px bg-foreground/30" />
-            Built for Canadian privacy law
+            Digital signage for any screen
           </span>
         </div>
 
@@ -108,9 +108,9 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            The only platform that combines Canadian privacy law compliance,
-            cyber insurance documentation, and incident response in one place.
-            One assessment. Two scores. Complete compliance pack.
+            Upload images, video, and PDFs — they play on any in-store TV
+            through a private, per-screen link. Manage every display from your
+            phone. No apps, no media players, no IT.
           </p>
 
           {/* CTAs */}
@@ -119,7 +119,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
+            <a href="https://cal.com/staqtech/30min" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
@@ -128,13 +128,13 @@ export function HeroSection() {
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
-            <a href="/assessment">
+            <a href="/#how-it-works">
               <Button
                 size="lg"
                 variant="outline"
                 className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5"
               >
-                Free assessment
+                See how it works
               </Button>
             </a>
           </div>
@@ -152,10 +152,10 @@ export function HeroSection() {
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-16">
               {[
-                { value: "41%", label: "SMB insurance applications rejected", company: "INDUSTRY STAT" },
-                { value: "$100K", label: "per-person fine under new privacy law", company: "BILL C-27" },
-                { value: "~0%", label: "SMBs with full PIPEDA documentation", company: "COMPLIANCE GAP" },
-                { value: "30 min", label: "to get compliant with syneOps", company: "SYNEOPS" },
+                { value: "30 sec", label: "to get a new screen live", company: "SETUP" },
+                { value: "$0", label: "hardware — runs on any smart TV", company: "NO MEDIA PLAYER" },
+                { value: "1 link", label: "per screen, private + revocable", company: "SECURE BY DESIGN" },
+                { value: "24/7", label: "always-on, self-updating displays", company: "SYNEOPS" },
               ].map((stat) => (
                 <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
                   <span className="text-4xl lg:text-5xl font-display">{stat.value}</span>

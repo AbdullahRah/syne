@@ -21,9 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'syneOps - PIPEDA Compliance & Cyber Insurance Readiness',
-  description: 'The only platform that combines Canadian privacy law compliance, cyber insurance documentation, and incident response in one place. One assessment. Two scores. Complete compliance pack.',
-  generator: 'v0.app',
+  title: 'syneOps — Cloud Digital Signage for Any Screen',
+  description: 'Upload images, video, and PDFs and play them on any in-store TV through a private, per-screen link. Manage every display from your phone. No apps, no media players, no IT.',
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

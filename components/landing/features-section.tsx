@@ -5,26 +5,26 @@ import { useEffect, useRef, useState } from "react";
 const features = [
   {
     number: "01",
-    title: "Unified",
-    description: "One assessment produces both your PIPEDA compliance score and insurance readiness score. Same documentation, two critical needs solved.",
+    title: "Upload anything",
+    description: "Drop in images, video, and PDFs. PDFs auto-convert to full-screen slides. Build a playlist, set how long each item shows, drag to reorder — done.",
     visual: "deploy",
   },
   {
     number: "02",
-    title: "Instant",
-    description: "AI-powered document generation delivers your complete compliance pack in minutes. Not weeks of consultant time. Not generic templates. Documents built for your specific business.",
+    title: "Any screen, no hardware",
+    description: "Point any smart TV, Fire TV Stick, or Android box at your screen's private URL. No dedicated media player, no proprietary box, no install. If it opens a browser, it runs syneOps.",
     visual: "ai",
   },
   {
     number: "03",
-    title: "Continuous",
-    description: "Quarterly re-assessments, regulatory change alerts as the new privacy law evolves, and score tracking so you can show improvement to insurers and auditors.",
+    title: "Manage from your phone",
+    description: "Change what's on screen from any phone or laptop. Updates push to the TV within seconds — no reboot, no walking over to the display, no app to download.",
     visual: "collab",
   },
   {
     number: "04",
-    title: "Canadian-Built",
-    description: "Purpose-built for Canadian privacy law from day one. PIPEDA, provincial PIPA, Quebec's Law 25, and the incoming Bill C-27 / CPPA. Not a US product with a Canadian sticker on it.",
+    title: "Private by design",
+    description: "Every screen gets its own unguessable, revocable link. One screen's URL never exposes another location. Lose a link, reset it in one tap and the old one dies instantly.",
     visual: "security",
   },
 ];
@@ -323,7 +323,7 @@ export function FeaturesSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
             <span className="w-8 h-px bg-foreground/30" />
-            The syneOps Advantage
+            Why syneOps
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${

@@ -5,9 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Products", href: "/#features" },
+  { name: "Features", href: "/#features" },
   { name: "How it works", href: "/#how-it-works" },
-  { name: "Solutions", href: "/#integrations" },
   { name: "Pricing", href: "/#pricing" },
 ];
 
@@ -67,16 +66,16 @@ export function Navigation() {
             <a href="#" className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}>
               Login
             </a>
-            <a href="/assessment">
+            <a href="/#pricing">
               <Button
                 size="sm"
                 variant="outline"
                 className={`rounded-full border-foreground/20 hover:bg-foreground/5 transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
               >
-                Free assessment
+                Pricing
               </Button>
             </a>
-            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
+            <a href="https://cal.com/staqtech/30min" target="_blank" rel="noopener noreferrer">
               <Button
                 size="sm"
                 className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
@@ -139,15 +138,15 @@ export function Navigation() {
           }`}
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <a href="/assessment" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/#pricing" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant="outline"
                 className="w-full rounded-full h-14 text-base"
               >
-                Free assessment
+                Pricing
               </Button>
             </a>
-            <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="https://cal.com/staqtech/30min" target="_blank" rel="noopener noreferrer" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 className="w-full bg-foreground text-background rounded-full h-14 text-base"
               >
