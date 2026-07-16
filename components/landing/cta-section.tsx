@@ -52,20 +52,20 @@ export function CtaSection() {
               {/* Left content */}
               <div className="flex-1">
                 <h2 className="text-4xl lg:text-7xl font-display tracking-tight mb-8 leading-[0.95]">
-                  Get compliant.
+                  Turn any TV
                   <br />
-                  Get insured.
+                  into a screen
                   <br />
-                  Get started.
+                  worth watching.
                 </h2>
 
                 <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-xl">
-                  See your PIPEDA compliance score and insurance readiness in under 5 minutes.
-                  No credit card. No sales call. Just answers.
+                  Book a 30-minute demo and we&apos;ll have a screen live on your
+                  hardware before the call ends. No media players, no installs.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <a href="https://calendly.com/staqtech/30min?month=2026-03" target="_blank" rel="noopener noreferrer">
+                  <a href="https://cal.com/staqtech/30min" target="_blank" rel="noopener noreferrer">
                     <Button
                       size="lg"
                       className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
@@ -74,19 +74,19 @@ export function CtaSection() {
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </a>
-                  <a href="/assessment">
+                  <a href="/#pricing">
                     <Button
                       size="lg"
                       variant="outline"
                       className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5"
                     >
-                      Free assessment
+                      See pricing
                     </Button>
                   </a>
                 </div>
 
                 <p className="text-sm text-muted-foreground mt-8 font-mono">
-                  No credit card required. Your data stays private.
+                  Runs on hardware you already own. Cancel anytime.
                 </p>
               </div>
 

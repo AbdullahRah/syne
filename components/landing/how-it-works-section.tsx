@@ -5,40 +5,37 @@ import { useEffect, useRef, useState } from "react";
 const steps = [
   {
     number: "I",
-    title: "Take the Assessment",
-    description: "Answer questions about your industry, tech stack, data handling practices, and current security controls. Takes about 5 minutes.",
-    code: `syneOps.assess({
-  industry: 'financial-services',
-  dataTypes: ['PII', 'financial'],
-  techStack: ['Stripe', 'AWS', 'Slack']
-})
+    title: "Create a screen",
+    description: "Add a location and a screen from your dashboard. syneOps generates a private, unguessable display link for that TV — one link, one screen.",
+    code: `Location:  Front Counter — King St.
+Screen:    Menu Board
 
-// 12 questions, ~5 minutes`,
+→ display link created:
+   display.syneautonomous.cloud/s/9fKq…x2
+
+Copied to clipboard ✓`,
   },
   {
     number: "II",
-    title: "Get Your Scores",
-    description: "Receive a PIPEDA Compliance Score and a Cyber Insurance Readiness Score. Plus a gap report showing exactly what's missing and why it matters.",
-    code: `const results = await syneOps.score()
+    title: "Point your TV at it",
+    description: "Open that link in the browser on any smart TV, Fire TV Stick, or Android box (kiosk mode recommended). It goes full-screen and starts looping. No app, no media player.",
+    code: `Fire TV Stick · Fully Kiosk Browser
+→ open display link
+→ full-screen, auto-loop
 
-// PIPEDA Compliance: 72%
-// Insurance Readiness: 58%
-// Gaps identified: 6`,
+Screen status:  ● live
+Last ping:      just now`,
   },
   {
     number: "III",
-    title: "Generate Documents",
-    description: "AI generates your complete compliance document pack — privacy policies, breach response plans, consent frameworks, insurance evidence packages. All customized to your specific business.",
-    code: `syneOps.generate({
-  documents: [
-    'privacy-policy',
-    'breach-response-plan',
-    'consent-framework',
-    'insurance-evidence'
-  ]
-})
+    title: "Update from your phone",
+    description: "Upload images, video, or a PDF, arrange the playlist, set durations. Save — and the TV updates itself within seconds. No reboot, no walking over to the screen.",
+    code: `Playlist · Menu Board
+  1. lunch-specials.jpg      10s
+  2. promo-reel.mp4          22s
+  3. hours.pdf → 2 slides     8s
 
-// 14 documents generated`,
+Saved ✓  →  screen updating…`,
   },
 ];
 
@@ -97,9 +94,9 @@ export function HowItWorksSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            From assessment to
+            From upload to
             <br />
-            <span className="text-background/50">compliant in 30 minutes.</span>
+            <span className="text-background/50">on-screen in minutes.</span>
           </h2>
         </div>
 
@@ -153,7 +150,7 @@ export function HowItWorksSection() {
                   <div className="w-3 h-3 rounded-full bg-background/20" />
                   <div className="w-3 h-3 rounded-full bg-background/20" />
                 </div>
-                <span className="text-xs font-mono text-background/40">compliance.ts</span>
+                <span className="text-xs font-mono text-background/40">syneOps dashboard</span>
               </div>
 
               {/* Code content */}

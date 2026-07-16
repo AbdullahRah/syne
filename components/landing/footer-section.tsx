@@ -4,30 +4,29 @@ import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 
 const footerLinks = {
-  Products: [
-    { name: "PIPEDA Compliance", href: "#features" },
-    { name: "Insurance Readiness", href: "#features" },
-    { name: "Incident Response", href: "#features" },
-    { name: "Vendor Risk", href: "#features" },
+  Product: [
+    { name: "Features", href: "/#features" },
+    { name: "How it works", href: "/#how-it-works" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "Get a demo", href: "https://cal.com/staqtech/30min" },
   ],
-  Solutions: [
-    { name: "Financial Services", href: "#integrations" },
-    { name: "Healthcare", href: "#integrations" },
-    { name: "Professional Services", href: "#integrations" },
-    { name: "Technology / SaaS", href: "#integrations" },
+  "Use cases": [
+    { name: "Restaurants & cafés", href: "/#features" },
+    { name: "Retail & showrooms", href: "/#features" },
+    { name: "Gyms & studios", href: "/#features" },
+    { name: "Clinics & waiting rooms", href: "/#features" },
   ],
   Resources: [
+    { name: "Kiosk setup guide", href: "#" },
+    { name: "Supported devices", href: "#" },
     { name: "Blog", href: "#" },
-    { name: "PIPEDA Checklist", href: "#" },
-    { name: "Bill C-27 Guide", href: "#" },
-    { name: "Free Assessment", href: "/assessment" },
+    { name: "Contact", href: "#" },
   ],
   Company: [
     { name: "About", href: "#" },
-    { name: "Pricing", href: "#pricing" },
+    { name: "Pricing", href: "/#pricing" },
     { name: "Contact", href: "#" },
     { name: "Privacy Policy", href: "#" },
-    { name: "Disclaimer", href: "/disclaimer" },
   ],
 };
 
@@ -55,8 +54,8 @@ export function FooterSection() {
               </a>
 
               <p className="text-muted-foreground leading-relaxed mb-8 max-w-xs">
-                PIPEDA compliance and cyber insurance readiness for every Canadian business.
-                Built by Staqtech, out of Calgary.
+                Cloud digital signage for any screen. Upload once, display anywhere,
+                update from your phone — no media players, no IT.
               </p>
 
               {/* Social Links */}
@@ -98,7 +97,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; 2026 Staqtech Inc. All rights reserved.
+            &copy; 2026 Syne Autonomous. All rights reserved.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -107,8 +106,6 @@ export function FooterSection() {
             <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
             <span className="text-foreground/20">|</span>
             <a href="#" className="hover:text-foreground transition-colors">Cookies</a>
-            <span className="text-foreground/20">|</span>
-            <a href="/disclaimer" className="hover:text-foreground transition-colors">Disclaimer</a>
           </div>
         </div>
       </div>
