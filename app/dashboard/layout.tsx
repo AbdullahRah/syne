@@ -22,9 +22,14 @@ export default async function DashboardLayout({
     .maybeSingle();
   if (!business) {
     const fallbackName = user.email?.split("@")[0] ?? "My business";
+    // Idempotent: the unique constraint on owner_user_id + ignoreDuplicates
+    // makes concurrent first-load requests safe (no duplicate businesses).
     await supabase
       .from("businesses")
-      .insert({ owner_user_id: user.id, name: fallbackName });
+      .upsert(
+        { owner_user_id: user.id, name: fallbackName },
+        { onConflict: "owner_user_id", ignoreDuplicates: true },
+      );
   }
 
   return (
